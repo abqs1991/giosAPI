@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "isomorphic-fetch";
-import Footer from './Footer'
+import Footer from "./Footer";
 
 class App extends Component {
   constructor() {
@@ -132,12 +132,26 @@ class App extends Component {
   }
   date() {
     const time = new Date();
-    console.log(Date())
-    return `${time.getDate()}.${time.getMonth()+1}.${time.getFullYear()}`
+    console.log(Date());
+    return `${time.getDate()}.${time.getMonth() + 1}.${time.getFullYear()}`;
   }
+
+  //added click handler for calculating avg levels in city
+  // handleClick() {
+  //   const =
+  // }
   render() {
     //values.
     const { PM10, C6H6, PM25, SO2, NO2, O3, CO } = this.state;
+    const accLvl = {
+      PM10: 40,
+      C6H6: 40000,
+      PM25: 25,
+      SO2: 125,
+      NO2: 40,
+      O3: 180,
+      CO: 35000000
+    };
     setTimeout(() => {
       const { PM10, C6H6, PM25, SO2, NO2, O3, CO } = Math.round(this.state);
     }, 31000);
@@ -153,7 +167,20 @@ class App extends Component {
             OBLICZANIE ŚREDNIEJ JAKOŚCI POWIETRZA W POLSCE. STAN NA GODZINĘ{" "}
             {this.time()} DNIA {this.date()}
           </h1>
-          <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+          <div className="lds-spinner">
+            <div />
+            <div />
+            <div />
+            <div />
+            <div />
+            <div />
+            <div />
+            <div />
+            <div />
+            <div />
+            <div />
+            <div />
+          </div>
           <h1>PROSZĘ CZEKAĆ!</h1>
         </div>
         <div
@@ -162,41 +189,48 @@ class App extends Component {
         >
           <h3 className="item">
             Średni poziom stężenia PM10 w Polsce wynosi:
-            {Math.round(PM10 * 100) / 100}μg/m3.
+            {Math.round(PM10 * 100) / 100}μg/m3 co stanowi{" "}
+            {Math.round((PM10 * 100) / accLvl.PM10)} % normy.
           </h3>
           <hr className="style-two" />
           <h3 className="item">
             Średni poziom stężenia PM2.5 w Polsce wynosi:
-            {Math.round(PM25 * 100) / 100}μg/m3.
+            {Math.round(PM25 * 100) / 100}μg/m3{" "}
+            {Math.round((PM25 * 100) / accLvl.PM25)} % normy.
           </h3>
           <hr className="style-two" />
           <h3 className="item">
             Średni poziom stężenia CO w Polsce wynosi:
-            {Math.round(CO * 100) / 100}μg/m3.
+            {Math.round(CO * 100) / 100}μg/m3{" "}
+            {Math.round((CO * 100) / accLvl.CO)} % normy.
           </h3>
           <hr className="style-two" />
           <h3 className="item">
             Średni poziom stężenia SO2 w Polsce wynosi:
-            {Math.round(SO2 * 100) / 100}μg/m3.
+            {Math.round(SO2 * 100) / 100}μg/m3{" "}
+            {Math.round((SO2 * 100) / 40)} % normy.
           </h3>
           <hr className="style-two" />
           <h3 className="item">
             Średni poziom stężenia NO2 w Polsce wynosi:
-            {Math.round(NO2 * 100) / 100}μg/m3.
+            {Math.round(NO2 * 100) / 100}μg/m3{" "}
+            {Math.round((NO2 * 100) / accLvl.NO2)} % normy.
           </h3>
           <hr className="style-two" />
           <h3 className="item">
             Średni poziom stężenia O3 w Polsce wynosi:
-            {Math.round(O3 * 100) / 100}μg/m3.
+            {Math.round(O3 * 100) / 100}μg/m3{" "}
+            {Math.round((O3 * 100) / accLvl.O3)} % normy.
           </h3>
           <hr className="style-two" />
           <h3 className="item">
             Średni poziom stężenia C6H6 w Polsce wynosi:
-            {Math.round(C6H6 * 100) / 100}μg/m3.
+            {Math.round(C6H6 * 100) / 100}μg/m3{" "}
+            {Math.round((C6H6 * 100) / accLvl.C6H6)} % normy.
           </h3>
           <hr className="style-two" />
         </div>
-        <Footer/>
+        <Footer />
       </div>
     );
   }
